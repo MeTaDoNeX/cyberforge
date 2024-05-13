@@ -1,0 +1,130 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="catalog-container">
+<div class="catalog">
+    <a href="{% url 'catalog' %}"><h3>Каталог товаров</h3></a>
+    <ul>
+        {% for item in catalog %}
+            <li>
+                <a href="{% url 'catalog' %}?category={{ item.name }}">
+                    <span class="item">
+                        <img src="{{ item.icon.url }}" alt="{{ item.title }}">
+                        {{ item.name }}
+                    </span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="catalog-image">
+        <img src="{% static 'shop/images/slider/angle-down.svg' %}" alt="Изображение каталога">
+    </div>
+</div>
+
+
+        <div class="slider">
+             <div class="slide">
+                    <img src="{% static 'shop/images/slider/SMM_baners_Redragon.jpg' %}" alt="Slide 1">
+                </div>
+                <div class="slide">
+                    <img src="{% static 'shop/images/slider/Adata_web.jpg' %}" alt="Slide 2">
+                </div>
+                <div class="slide">
+                    <img src="{% static 'shop/images/slider/Buro_web.jpg' %}" alt="Slide 2">
+                </div>
+                <div class="slide">
+                    <img src="{% static 'shop/images/slider/epsondhdj.jpg' %}" alt="Slide 1">
+                </div>
+                <div class="slide">
+                    <img src="{% static 'shop/images/slider/SMM_baners_Tp-Link.jpg' %}" alt="Slide 2">
+                </div>
+                <div class="slide">
+                    <img src="{% static 'shop/images/slider/Tplink_web.jpg' %}" alt="Slide 1">
+                </div>
+                <div class="slide">
+                    <img src="{% static 'shop/images/slider/videosale_1140.jpg' %}" alt="Slide 2">
+                </div>
+            <div class="slider-controls">
+                <img src="{% static 'shop/images/slider/circle.svg' %}" alt="Slide indicator" class="slider-indicator active">
+                <img src="{% static 'shop/images/slider/circle.svg' %}" alt="Slide indicator" class="slider-indicator">
+                <img src="{% static 'shop/images/slider/circle.svg' %}" alt="Slide indicator" class="slider-indicator">
+                <img src="{% static 'shop/images/slider/circle.svg' %}" alt="Slide indicator" class="slider-indicator">
+                <img src="{% static 'shop/images/slider/circle.svg' %}" alt="Slide indicator" class="slider-indicator">
+                <img src="{% static 'shop/images/slider/circle.svg' %}" alt="Slide indicator" class="slider-indicator">
+                <img src="{% static 'shop/images/slider/circle.svg' %}" alt="Slide indicator" class="slider-indicator">
+            </div>
+        </div>
+    </div>
+<div class="category-nav">
+    <ul>
+        <li><a href="{% url 'home' %}" >Все</a></li>
+        {% for category in categories %}
+        <li><a href="#" class="category-link">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+    <div class="category-slider-container">
+    <button id="prevBtn"><img src="{% static 'shop/images/category/arrow-left.svg' %}" alt="Левая кнопка"></button>
+    <div class="category-slider">
+        {% for product in products %}
+        <div class="category-slide">
+            <a href="{% url 'catalog' %}">
+                <img class="category-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                <div class="product-name">
+                <h4><a href="{% url 'catalog' %}">{{ product.name }}</a></h4>
+                    </div>
+                <div class="product-details">
+                    <div class="product-price">{{ product.price }}⃀</div>
+                    <a href="{% url 'delivery' %}"><img class="basket" src="{% static 'shop/images/category/basket.png' %}" alt="Add to Cart"></a>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <button id="nextBtn"><img src="{% static 'shop/images/category/arrow-right.svg' %}" alt="Правая кнопка"></button>
+</div>
+
+ <div class="computers">
+    <div class="left-section">
+        <h3>Готовые решения</h3>
+        <div class="computer-items">
+            {% for solution in solutions %}
+            <div class="computer-item">
+                <a href="#"><img src="{{ solution.image.url }}" alt="{{ solution.name }}">
+                    <div class="comp-name">
+                        <div class="computer-name">{{ solution.name }}</div>
+                        <div class="computer-price">{{ solution.price }}⃀</div>
+                    </div>
+                </a>
+                <div class="solution-descrp">
+                <h4>{{ solution.description }}</h4>
+                    </div>
+                <button class="details-btn">Подробнее</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="right-section">
+        <h3>Прочее</h3>
+        <div class="category-image">
+            <img src="{% static 'shop/images/solutions/upgrade.png' %}" alt="апгрейд">
+            <a href="#" class="details-btn-full">Апгрейд ПК</a>
+        </div>
+        <div class="category-image">
+            <img src="{% static 'shop/images/solutions/trade-in.png' %}" alt="trade">
+            <a href="#" class="details-btn-full">Trade-in</a>
+        </div>
+        <div class="category-image">
+            <img src="{% static 'shop/images/solutions/credit.png' %}" alt="Рассрочка">
+            <a href="#" class="details-btn-full">Рассрочка</a>
+        </div>
+    </div>
+</div>
+    <script src="{% static 'shop/js/slider.js' %}"></script>
+    <script src="{% static 'shop/js/filter.js' %}"></script>
+    <script src="{% static 'shop/js/slider_categories.js' %}"></script>
+{% endblock %}

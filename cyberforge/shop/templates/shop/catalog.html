@@ -1,0 +1,113 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2 class="catalog-h2" style="margin-top: 0;">Категории</h2>
+<div class="category-buttons">
+    {% for category in categories %}
+        <button id="{{ category.name|lower }}-btn" class="category-btn">{{ category.name }}</button>
+    {% endfor %}
+</div>
+
+
+
+
+<h2 class="catalog-h2">Каталог товаров</h2>
+<div class="categories-block">
+    <form id="price-filter-form" method="GET">
+    <div class="filters">
+        <h3>Цена</h3>
+        <div class="price-filter">
+
+
+                <div class="min-price-input-container">
+                    <label for="min-price">Мин, ⃀</label>
+                    <input type="number" id="min-price" name="min-price" min="0" placeholder="От">
+                </div>
+                <div class="price-icon-container">
+                    <img src="{% static 'shop/images/catalog/line.svg' %}" alt="Icon" class="filter-icon">
+                </div>
+                <div class="max-price-input-container">
+                    <label for="max-price">Макс, ⃀</label>
+                    <input type="number" id="max-price" name="max-price" min="0" placeholder="До">
+                </div>
+
+
+        </div>
+        <h3>Бренд</h3>
+<div class="brand-filter">
+    {% for choice in product.BRAND_CHOICES %}
+        <label class="brand-label">
+        <input type="checkbox" name="brand" value="{{ choice.0 }}" class="brand-checkbox">
+        <span class="custom-checkbox"></span> <span class="brands"> {{ choice.1 }} </span>
+    </label>
+    {% endfor %}
+
+
+</div>
+
+
+
+        <div class="filter-controls">
+            <button type="submit" id="show-filter">Показать</button>
+            <button type="submit" id="reset-filter">Сбросить</button>
+        </div>
+    </div>
+        </form>
+</div>
+
+
+<div class="products-catalog">
+    <div class="product-top-bar">
+    <div class="product-count">
+         <span id="product-count">Найдено: 0 товаров</span>
+    </div>
+
+
+<div class="sort-by">
+    <span>Сортировать по:</span>
+    <div class="dropdown">
+        <button id="sort-btn" class="dropbtn default-btn">По умолчанию</button>
+        <div id="sort-dropdown" class="dropdown-content">
+            <a href="#" data-sort="default">По умолчанию</a>
+            <a href="#" data-sort="asc">По возрастанию</a>
+            <a href="#" data-sort="desc">По убыванию</a>
+        </div>
+    </div>
+</div>
+</div>
+{% if selected_category %}
+    <h2>Товары в категории "{{ selected_category }}"</h2>
+{% else %}
+    <h2>Весь каталог товаров</h2>
+{% endif %}
+
+
+<div class="products-list" id="product-list">
+    {% for product in products %}
+        <div class="product-item" data-category="{{ product.catalog_item.name|lower }}">
+            <img class="product-item-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <div class="product-item-description">
+            <p>{{ product.description|truncatechars:100 }}</p>
+        </div>
+<p>{{ product.brand }}</p>
+            <div class="product-price-basket">
+                <p>Цена: {{ product.price }}</p>
+                <a href="{% url 'delivery' %}"><img src="{% static 'shop/images/catalog/basket-catalog.svg' %}" alt="Add to Cart"></a>
+            </div>
+        </div>
+    {% empty %}
+        <p>Нет продуктов для отображения.</p>
+    {% endfor %}
+</div>
+
+</div>
+<script src="{% static 'shop/js/cart.js' %}"></script>
+<script src="{% static 'shop/js/product-top-bar.js' %}"></script>
+<script src="{% static 'shop/js/sort-button.js' %}"></script>
+<script src="{% static 'shop/js/catalog_categories.js' %}"></script>
+<script src="{% static 'shop/js/catalog.js' %}"></script>
+
+{% endblock %}

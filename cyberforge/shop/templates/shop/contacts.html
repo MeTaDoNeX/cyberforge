@@ -1,0 +1,35 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'shop/css/contacts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="contacts-page">
+        <div class="map-container">
+            <div class="contact-info-left">
+                <h2 >Как с нами связаться:</h2>
+                <div class="contact-info">
+                    <p>Телефон:
+
+                        +996 (777) 77-77-77
+
+                    +996 (777) 77-77-77</p>
+                    <p>Email:
+
+                        Adilet@gmail.com</p>
+                    <p>Адрес:
+
+                        ул.Киевская 999-4</p>
+                </div>
+            </div>
+            <div class="map">
+                <h2>Где мы находимся:</h2>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1461.89519351877!2d74.58476030840737!3d42.87726821841893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ec81899fc5ca3%3A0xe00f47794bf03790!2z0JzQtdC20LTRg9C90LDRgNC-0LTQvdGL0Lkg0KPQvdC40LLQtdGA0YHQuNGC0LXRgiDQmtGL0YDQs9GL0LfRgdGC0LDQvdCwIC0g0JfQsNC_0LDQtNC90YvQuSDQutCw0LzQv9GD0YE!5e0!3m2!1sru!2skg!4v1715596571984!5m2!1sru!2skg" width="600" height="200" style="border:2px solid blue; border-radius:15px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
